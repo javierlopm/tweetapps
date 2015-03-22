@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # RaspberryPi app
 # 
@@ -35,6 +35,11 @@ consumerSecret      = keys.readline()
 acessToken          = keys.readline()
 acessTokenSecret    = keys.readline()
 keys.close()
+
+print consumerKey
+print consumerSecret
+print acessToken
+print acessTokenSecret
 
 #Tweepy init
 auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
