@@ -5,7 +5,7 @@
 # Developed by Javier Lopez
 # 03/22/2015
 
-from twython import Twython
+import tweepy
 import sys
 import re
 import datetime
@@ -17,10 +17,13 @@ import subprocess
 status = subprocess.check_output(["/opt/vc/bin/vcgencmd","measure_temp"])
 m      = re.search('[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?',status)
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 temp = float(m.group(0))
 
 #Messages according to temp, if less than 40, exit and don't tweet about it
-if  (40 <= temp and temp<50):
+if( 40 <= temp and temp < 50):
     string = 'Hey...'
 elif(50 <= temp and temp<60):
     string = 'Subiendo'
@@ -38,9 +41,10 @@ acessToken          = keys.readline()[:-1]
 acessTokenSecret    = keys.readline()[:-1]
 keys.close()
 
-#Twython init
-twitter = Twython(consumerKey, consumerSecret,acessToken, acessTokenSecret)
-twitter.verify_credentials()
+#Tweepy init
+auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
+auth.set_access_token(acessToken, acessTokenSecret)
+api = tweepy.API(auth)
 
 #Tweet temperature, according to the hour (Spanish hour word pick)
 if(string,datetime.datetime.now().strftime('%I') == '01' ):
@@ -56,4 +60,4 @@ else:
                                     float(m.group(0))
                                                   )
 
-status = twitter.update_status(status=string)
+status = api.update_status(status=string)
