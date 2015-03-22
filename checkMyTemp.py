@@ -5,7 +5,7 @@
 # Developed by Javier Lopez
 # 03/22/2015
 
-import tempweepy
+import tweepy
 import sys
 import re
 import datetime
