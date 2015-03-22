@@ -11,9 +11,15 @@ import re
 import datetime
 import subprocess
 
+
+
 #Temp check, Raspberry Pi only
 status = subprocess.check_output(["/opt/vc/bin/vcgencmd","measure_temp"])
 m      = re.search('[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?',status)
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 temp = float(m.group(0))
 
 #Messages according to temp, if less than 40, exit and don't tweet about it
