@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # RaspberryPi app
 # 
@@ -30,16 +30,15 @@ elif(50 <= temp and temp<60):
 elif(60 <= temp):
     string = 'Dude @javierlopm hace calor aqui'
 else:
-    string = " "
-    #exit()
+    exit()
 
 
 #Reading keys under the password file 
 keys = open('password','r')
-consumerKey         = keys.readline()
-consumerSecret      = keys.readline()
-acessToken          = keys.readline()
-acessTokenSecret    = keys.readline()
+consumerKey         = keys.readline()[:-1]
+consumerSecret      = keys.readline()[:-1]
+acessToken          = keys.readline()[:-1]
+acessTokenSecret    = keys.readline()[:-1]
 keys.close()
 
 #Tweepy init
@@ -61,4 +60,4 @@ else:
                                     float(m.group(0))
                                                   )
 
-status = api.update_status(string)
+status = api.update_status(status=string)
