@@ -31,7 +31,7 @@ auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(acessToken, acessTokenSecret)
 api = tweepy.API(auth)
 
-#Tweet temperature, according to the hour (Spanish hour word pick)
+#Make phrase and tweet it
 from randomPhrases.makePhrase import *
 d = dictionary()
 
